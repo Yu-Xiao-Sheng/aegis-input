@@ -1,0 +1,22 @@
+[Unit]
+Description=Aegis-Input Service
+Documentation=man:aegis-input(8)
+After=graphical.target network.target
+Wants=graphical.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/aegis-input
+User=aegis-input
+Group=input
+Environment=AEGIS_INPUT_CONFIG=/etc/aegis-input/config.toml
+Environment=AEGIS_INPUT_STATUS=/var/lib/aegis-input/status.toml
+Restart=on-failure
+RestartSec=5s
+
+# 设置正确的权限
+PermissionsStartOnly=true
+ExecStartPre=/usr/bin/chown -R aegis-input:input /etc/aegis-input /var/lib/aegis-input
+
+[Install]
+WantedBy=multi-user.target
