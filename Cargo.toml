@@ -11,6 +11,11 @@ tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 udev = "0.7"
 evdev = "0.12"
+chrono = { version = "0.4", features = ["serde"] }
+tokio = { version = "1", features = ["full"] }
+thiserror = "1"
+which = "6"
+libc = "0.2"
 
 [dev-dependencies]
 assert_cmd = "2"
