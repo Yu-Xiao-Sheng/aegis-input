@@ -21,3 +21,11 @@ libc = "0.2"
 assert_cmd = "2"
 predicates = "3"
 tempfile = "3"
+
+# 发布配置优化 - 静态链接和二进制大小优化
+[profile.release]
+opt-level = "z"        # 优化大小而非速度
+lto = true            # 启用链接时优化
+codegen-units = 1     # 更好的优化（但编译更慢）
+strip = true          # 自动移除符号表
+panic = "abort"       # 减小二进制大小（移除 unwind 表）

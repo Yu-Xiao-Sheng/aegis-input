@@ -1,0 +1,29 @@
+# Cargo 配置文件 - 静态链接优化
+# 文档: https://doc.rust-lang.org/cargo/reference/config.html
+
+# 构建配置
+[build]
+# 并行编译任务数（在 LTO 模式下建议设为 1）
+jobs = 4
+
+# 目标特定配置
+[target.x86_64-unknown-linux-musl]
+# 完全静态链接
+rustflags = ["-C", "link-arg=-static"]
+
+[target.aarch64-unknown-linux-musl]
+# 完全静态链接
+rustflags = ["-C", "link-arg=-static"]
+# 指定交叉编译链接器
+linker = "aarch64-linux-gnu-gcc"
+
+# 可选：为特定目标设置环境变量
+[env]
+# 设置编译时优化级别
+CC = "gcc"
+CFLAGS = "-O2"
+
+# 如果需要使用 vendored OpenSSL
+# OPENSSL_DIR = "/usr"
+# OPENSSL_LIB_DIR = "/usr/lib"
+# OPENSSL_INCLUDE_DIR = "/usr/include"
