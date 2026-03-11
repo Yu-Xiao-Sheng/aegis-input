@@ -26,14 +26,18 @@ fn external_keyboard_disables_and_restores_internal() {
     let mut runner = Runner::new(backend, true).expect("runner init");
 
     runner.process_next_event().expect("process connect");
-    assert!(runner
-        .backend()
-        .actions
-        .contains(&PolicyAction::Disable(DeviceType::Keyboard)));
+    assert!(
+        runner
+            .backend()
+            .actions
+            .contains(&PolicyAction::Disable(DeviceType::Keyboard))
+    );
 
     runner.process_next_event().expect("process disconnect");
-    assert!(runner
-        .backend()
-        .actions
-        .contains(&PolicyAction::Enable(DeviceType::Keyboard)));
+    assert!(
+        runner
+            .backend()
+            .actions
+            .contains(&PolicyAction::Enable(DeviceType::Keyboard))
+    );
 }

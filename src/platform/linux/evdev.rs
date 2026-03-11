@@ -129,6 +129,5 @@ fn ungrab_all(handles: &mut HashMap<PathBuf, evdev::Device>) -> anyhow::Result<(
 }
 
 fn should_skip_grab(err: &std::io::Error) -> bool {
-    matches!(err.kind(), ErrorKind::PermissionDenied)
-        || matches!(err.raw_os_error(), Some(25))
+    matches!(err.kind(), ErrorKind::PermissionDenied) || matches!(err.raw_os_error(), Some(25))
 }

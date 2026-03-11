@@ -101,7 +101,11 @@ impl SystemState {
         self.compute_actions(target_keyboard, target_pointing)
     }
 
-    fn compute_actions(&mut self, target_keyboard: bool, target_pointing: bool) -> Vec<PolicyAction> {
+    fn compute_actions(
+        &mut self,
+        target_keyboard: bool,
+        target_pointing: bool,
+    ) -> Vec<PolicyAction> {
         let mut actions = Vec::new();
 
         if target_keyboard != self.policy.keyboard_disabled {

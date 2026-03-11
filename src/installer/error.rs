@@ -53,7 +53,10 @@ impl InstallError {
 
     /// 从进程错误转换
     pub fn from_process_status(status: std::process::ExitStatus) -> Self {
-        InstallError::ProcessError(format!("Process failed with exit code: {}", status.code().unwrap_or(-1)))
+        InstallError::ProcessError(format!(
+            "Process failed with exit code: {}",
+            status.code().unwrap_or(-1)
+        ))
     }
 
     /// 从路径错误转换
@@ -70,18 +73,23 @@ impl ErrorHandler {
     pub fn format_error(error: &InstallError) -> String {
         match error {
             InstallError::PermissionDenied => {
-                "权限不足。请使用 root 用户执行安装脚本。\n".to_string() +
-                "运行命令: sudo ./install/linux/install.sh"
+                "权限不足。请使用 root 用户执行安装脚本。\n".to_string()
+                    + "运行命令: sudo ./install/linux/install.sh"
             }
             InstallError::SystemdNotAvailable => {
-                "systemd 未安装或不可用。\n".to_string() +
-                "请确保您的系统支持 systemd。"
+                "systemd 未安装或不可用。\n".to_string() + "请确保您的系统支持 systemd。"
             }
             InstallError::InstallationFailed(msg) => {
-                format!("安装失败: {}\n\n可能的解决方案:\n- 检查磁盘空间\n- 检查网络连接\n- 确保有足够的权限", msg)
+                format!(
+                    "安装失败: {}\n\n可能的解决方案:\n- 检查磁盘空间\n- 检查网络连接\n- 确保有足够的权限",
+                    msg
+                )
             }
             InstallError::ServiceOperationFailed(msg) => {
-                format!("服务操作失败: {}\n\n请检查:\n- systemd 服务状态\n- 日志: journalctl -u aegis-input", msg)
+                format!(
+                    "服务操作失败: {}\n\n请检查:\n- systemd 服务状态\n- 日志: journalctl -u aegis-input",
+                    msg
+                )
             }
             _ => format!("错误: {}", error),
         }

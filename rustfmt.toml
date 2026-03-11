@@ -26,4 +26,3 @@ trailing_comma = "Vertical"
 
 # 空白
 spaces_around_ranges = true
-indent_style = "Space"

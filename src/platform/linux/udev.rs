@@ -142,5 +142,8 @@ fn matches_bus(value: Option<&OsStr>, list: &[String]) -> bool {
 }
 
 fn prop_is_true(device: &udev::Device, key: &str) -> bool {
-    matches!(device.property_value(key).and_then(|v| v.to_str()), Some("1"))
+    matches!(
+        device.property_value(key).and_then(|v| v.to_str()),
+        Some("1")
+    )
 }

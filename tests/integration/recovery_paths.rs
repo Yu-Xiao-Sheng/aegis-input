@@ -19,20 +19,26 @@ fn disable_feature_restores_and_blocks_actions() {
     let mut runner = Runner::new(backend, false).expect("runner init");
 
     runner.process_next_event().expect("process connect");
-    assert!(!runner
-        .backend()
-        .actions
-        .contains(&PolicyAction::Disable(DeviceType::Keyboard)));
+    assert!(
+        !runner
+            .backend()
+            .actions
+            .contains(&PolicyAction::Disable(DeviceType::Keyboard))
+    );
 
     runner.set_enabled(true).expect("enable feature");
-    assert!(runner
-        .backend()
-        .actions
-        .contains(&PolicyAction::Disable(DeviceType::Keyboard)));
+    assert!(
+        runner
+            .backend()
+            .actions
+            .contains(&PolicyAction::Disable(DeviceType::Keyboard))
+    );
 
     runner.set_enabled(false).expect("disable feature");
-    assert!(runner
-        .backend()
-        .actions
-        .contains(&PolicyAction::Enable(DeviceType::Keyboard)));
+    assert!(
+        runner
+            .backend()
+            .actions
+            .contains(&PolicyAction::Enable(DeviceType::Keyboard))
+    );
 }

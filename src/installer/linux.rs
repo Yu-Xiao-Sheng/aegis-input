@@ -91,20 +91,25 @@ impl LinuxInstaller {
 
     /// 确保 systemd 服务文件存在
     fn ensure_systemd_unit(&self) -> Result<(), InstallError> {
-        let unit_path = self.metadata.unit_path.as_ref()
+        let unit_path = self
+            .metadata
+            .unit_path
+            .as_ref()
             .ok_or_else(|| InstallError::InstallationFailed("Unit path not set".to_string()))?;
 
         if !unit_path.exists() {
             std::fs::write(
                 unit_path,
-                include_str!("../../install/linux/aegis-input.service")
-            ).map_err(|e| InstallError::InstallationFailed(format!("Failed to write unit file: {}", e)))?;
+                include_str!("../../install/linux/aegis-input.service"),
+            )
+            .map_err(|e| {
+                InstallError::InstallationFailed(format!("Failed to write unit file: {}", e))
+            })?;
 
             // 设置正确的权限
-            fs::set_permissions(
-                unit_path,
-                PermissionsExt::from_mode(0o644)
-            ).map_err(|e| InstallError::InstallationFailed(format!("Failed to set permissions: {}", e)))?;
+            fs::set_permissions(unit_path, PermissionsExt::from_mode(0o644)).map_err(|e| {
+                InstallError::InstallationFailed(format!("Failed to set permissions: {}", e))
+            })?;
         }
 
         Ok(())
@@ -121,7 +126,9 @@ impl LinuxInstaller {
             .arg("-u")
             .arg(&self.config.user)
             .output()
-            .map_err(|e| InstallError::InstallationFailed(format!("Failed to check user: {}", e)))?;
+            .map_err(|e| {
+                InstallError::InstallationFailed(format!("Failed to check user: {}", e))
+            })?;
 
         if !output.status.success() {
             // 创建用户
@@ -132,7 +139,9 @@ impl LinuxInstaller {
                 .arg("/usr/sbin/nologin")
                 .arg(&self.config.user)
                 .output()
-                .map_err(|e| InstallError::InstallationFailed(format!("Failed to create user: {}", e)))?;
+                .map_err(|e| {
+                    InstallError::InstallationFailed(format!("Failed to create user: {}", e))
+                })?;
         }
 
         // 添加到 input 组
@@ -140,7 +149,9 @@ impl LinuxInstaller {
             Command::new("groupadd")
                 .arg("input")
                 .output()
-                .map_err(|e| InstallError::InstallationFailed(format!("Failed to create group: {}", e)))?;
+                .map_err(|e| {
+                    InstallError::InstallationFailed(format!("Failed to create group: {}", e))
+                })?;
         }
 
         Command::new("usermod")
@@ -148,63 +159,79 @@ impl LinuxInstaller {
             .arg("input")
             .arg(&self.config.user)
             .output()
-            .map_err(|e| InstallError::InstallationFailed(format!("Failed to add user to group: {}", e)))?;
+            .map_err(|e| {
+                InstallError::InstallationFailed(format!("Failed to add user to group: {}", e))
+            })?;
 
         Ok(())
     }
 
     /// 确保安装目录存在
     fn ensure_install_dir(&self) -> Result<(), InstallError> {
-        let install_dir = self.metadata.install_path.parent()
-            .ok_or_else(|| InstallError::InstallationFailed("Invalid install path".to_string()))?;
+        let install_dir =
+            self.metadata.install_path.parent().ok_or_else(|| {
+                InstallError::InstallationFailed("Invalid install path".to_string())
+            })?;
 
-        fs::create_dir_all(install_dir)
-            .map_err(|e| InstallError::InstallationFailed(format!("Failed to create install dir: {}", e)))?;
+        fs::create_dir_all(install_dir).map_err(|e| {
+            InstallError::InstallationFailed(format!("Failed to create install dir: {}", e))
+        })?;
 
         // 设置正确的权限
-        fs::set_permissions(
-            install_dir,
-            PermissionsExt::from_mode(0o755)
-        ).map_err(|e| InstallError::InstallationFailed(format!("Failed to set install dir permissions: {}", e)))?;
+        fs::set_permissions(install_dir, PermissionsExt::from_mode(0o755)).map_err(|e| {
+            InstallError::InstallationFailed(format!(
+                "Failed to set install dir permissions: {}",
+                e
+            ))
+        })?;
 
         Ok(())
     }
 
     /// 保存安装元数据
     fn save_metadata(&self) -> Result<(), InstallError> {
-        let metadata_dir = self.metadata.install_path.parent()
+        let metadata_dir = self
+            .metadata
+            .install_path
+            .parent()
             .unwrap_or(Path::new("/"))
             .join("var/lib/aegis-input");
 
-        fs::create_dir_all(&metadata_dir)
-            .map_err(|e| InstallError::InstallationFailed(format!("Failed to create metadata dir: {}", e)))?;
+        fs::create_dir_all(&metadata_dir).map_err(|e| {
+            InstallError::InstallationFailed(format!("Failed to create metadata dir: {}", e))
+        })?;
 
         let metadata_path = metadata_dir.join("install.toml");
-        let metadata_str = toml::to_string_pretty(&self.metadata)
-            .map_err(|e| InstallError::InstallationFailed(format!("Failed to serialize metadata: {}", e)))?;
+        let metadata_str = toml::to_string_pretty(&self.metadata).map_err(|e| {
+            InstallError::InstallationFailed(format!("Failed to serialize metadata: {}", e))
+        })?;
 
-        fs::write(&metadata_path, metadata_str)
-            .map_err(|e| InstallError::InstallationFailed(format!("Failed to write metadata: {}", e)))?;
+        fs::write(&metadata_path, metadata_str).map_err(|e| {
+            InstallError::InstallationFailed(format!("Failed to write metadata: {}", e))
+        })?;
 
         // 设置权限
-        fs::set_permissions(
-            &metadata_path,
-            PermissionsExt::from_mode(0o644)
-        ).map_err(|e| InstallError::InstallationFailed(format!("Failed to set metadata permissions: {}", e)))?;
+        fs::set_permissions(&metadata_path, PermissionsExt::from_mode(0o644)).map_err(|e| {
+            InstallError::InstallationFailed(format!("Failed to set metadata permissions: {}", e))
+        })?;
 
         Ok(())
     }
 
     /// 删除安装元数据
     fn remove_metadata(&self) -> Result<(), InstallError> {
-        let metadata_dir = self.metadata.install_path.parent()
+        let metadata_dir = self
+            .metadata
+            .install_path
+            .parent()
             .unwrap_or(Path::new("/"))
             .join("var/lib/aegis-input");
 
         let metadata_path = metadata_dir.join("install.toml");
         if metadata_path.exists() {
-            fs::remove_file(&metadata_path)
-                .map_err(|e| InstallError::UninstallationFailed(format!("Failed to remove metadata: {}", e)))?;
+            fs::remove_file(&metadata_path).map_err(|e| {
+                InstallError::UninstallationFailed(format!("Failed to remove metadata: {}", e))
+            })?;
         }
 
         // 如果目录为空，删除它
@@ -212,8 +239,9 @@ impl LinuxInstaller {
             && let Ok(entries) = fs::read_dir(&metadata_dir)
             && entries.count() == 0
         {
-            fs::remove_dir(&metadata_dir)
-                .map_err(|e| InstallError::UninstallationFailed(format!("Failed to remove metadata dir: {}", e)))?;
+            fs::remove_dir(&metadata_dir).map_err(|e| {
+                InstallError::UninstallationFailed(format!("Failed to remove metadata dir: {}", e))
+            })?;
         }
 
         Ok(())
@@ -273,8 +301,9 @@ impl Installer for LinuxInstaller {
         if let Some(unit_path) = &self.metadata.unit_path
             && unit_path.exists()
         {
-            fs::remove_file(unit_path)
-                .map_err(|e| InstallError::UninstallationFailed(format!("Failed to remove unit file: {}", e)))?;
+            fs::remove_file(unit_path).map_err(|e| {
+                InstallError::UninstallationFailed(format!("Failed to remove unit file: {}", e))
+            })?;
         }
 
         // 3. 删除安装元数据
@@ -284,7 +313,9 @@ impl Installer for LinuxInstaller {
         Command::new("userdel")
             .arg(&self.config.user)
             .output()
-            .map_err(|e| InstallError::UninstallationFailed(format!("Failed to delete user: {}", e)))?;
+            .map_err(|e| {
+                InstallError::UninstallationFailed(format!("Failed to delete user: {}", e))
+            })?;
 
         let duration = start_time.elapsed().as_secs();
 
@@ -296,10 +327,12 @@ impl Installer for LinuxInstaller {
     }
 
     fn is_installed(&self) -> bool {
-        self.metadata.unit_path.as_ref()
+        self.metadata
+            .unit_path
+            .as_ref()
             .map(|p| p.exists())
-            .unwrap_or(false) &&
-        self.config.config_path.exists()
+            .unwrap_or(false)
+            && self.config.config_path.exists()
     }
 
     fn get_metadata(&self) -> Result<InstallMetadata, InstallError> {

@@ -28,12 +28,16 @@ fn keyboard_and_mouse_are_independent() {
     runner.process_next_event().expect("kb connect");
     runner.process_next_event().expect("mouse connect");
 
-    assert!(runner
-        .backend()
-        .actions
-        .contains(&PolicyAction::Disable(DeviceType::Keyboard)));
-    assert!(runner
-        .backend()
-        .actions
-        .contains(&PolicyAction::Disable(DeviceType::Pointing)));
+    assert!(
+        runner
+            .backend()
+            .actions
+            .contains(&PolicyAction::Disable(DeviceType::Keyboard))
+    );
+    assert!(
+        runner
+            .backend()
+            .actions
+            .contains(&PolicyAction::Disable(DeviceType::Pointing))
+    );
 }

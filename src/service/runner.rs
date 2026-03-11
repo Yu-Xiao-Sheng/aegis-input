@@ -90,7 +90,10 @@ impl<B: PlatformBackend> Runner<B> {
     }
 }
 
-fn apply_actions<B: PlatformBackend>(backend: &mut B, actions: Vec<PolicyAction>) -> anyhow::Result<()> {
+fn apply_actions<B: PlatformBackend>(
+    backend: &mut B,
+    actions: Vec<PolicyAction>,
+) -> anyhow::Result<()> {
     for action in actions {
         backend.apply_action(action)?;
     }
