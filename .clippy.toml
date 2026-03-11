@@ -3,9 +3,8 @@
 # 禁止在生产代码中使用 unwrap()
 unwrap_used = "deny"
 
-# 强制处理 Result
+# 警告 expect 使用
 expect_used = "warn"
-unwrap_used = "deny"
 
 # 不允许 unsafe 代码
 unsafe_code = "forbid"
