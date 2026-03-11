@@ -67,5 +67,23 @@ sudo -E RUST_LOG=info ./target/debug/aegis-input run
 **systemd（计划）**
 将提供 systemd 服务与可选 CLI。服务模型见 `docs/implementation.md`。
 
+### 卸载
+
+如需卸载 Aegis Input：
+
+```bash
+# 方式 1: 使用卸载脚本（推荐）
+curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/Yu-Xiao-Sheng/aegis-input/main/install/remote/uninstall.sh | sudo bash
+
+# 方式 2: 手动卸载
+sudo systemctl stop aegis-input
+sudo systemctl disable aegis-input
+sudo rm /usr/local/bin/aegis-input
+sudo rm /etc/systemd/system/aegis-input.service
+sudo rm -rf /etc/aegis-input
+sudo rm -rf /var/lib/aegis-input
+sudo systemctl daemon-reload
+```
+
 **名称**
 Aegis 意为“盾”，体现目标: 在使用外置外设时防止内置设备误触。

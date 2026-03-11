@@ -181,7 +181,22 @@ aegis-input --version
 
 ## 卸载
 
-### 完全卸载
+### 一键卸载（推荐）
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/Yu-Xiao-Sheng/aegis-input/main/install/remote/uninstall.sh | sudo bash
+```
+
+此命令会：
+1. 停止 aegis-input 服务
+2. 禁用服务
+3. 删除二进制文件
+4. 删除 systemd 服务文件
+5. 删除配置和数据目录
+6. 删除系统用户和组（如果存在）
+7. 重载 systemd
+
+### 手动卸载
 
 ```bash
 # 1. 停止服务
@@ -200,14 +215,12 @@ sudo rm /etc/systemd/system/aegis-input.service
 sudo rm -rf /etc/aegis-input
 sudo rm -rf /var/lib/aegis-input
 
-# 6. 重载 systemd
+# 6. 删除系统用户和组
+sudo userdel aegis-input
+sudo groupdel aegis-input
+
+# 7. 重载 systemd
 sudo systemctl daemon-reload
-```
-
-### 使用现有卸载脚本
-
-```bash
-sudo /path/to/uninstall.sh
 ```
 
 ---
