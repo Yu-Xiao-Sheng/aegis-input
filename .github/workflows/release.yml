@@ -15,19 +15,19 @@ jobs:
     strategy:
       matrix:
         include:
-          # Linux x86_64 (musl for static linking)
-          - target: x86_64-unknown-linux-musl
+          # Linux x86_64 (gnu for dynamic linking)
+          - target: x86_64-unknown-linux-gnu
             os: ubuntu-latest
             use_cross: false
             artifact_name: aegis-input
-            asset_name: aegis-input-x86_64-unknown-linux-musl.tar.gz
+            asset_name: aegis-input-x86_64-unknown-linux-gnu.tar.gz
 
-          # Linux aarch64 (musl for static linking)
-          - target: aarch64-unknown-linux-musl
+          # Linux aarch64 (gnu for dynamic linking)
+          - target: aarch64-unknown-linux-gnu
             os: ubuntu-latest
             use_cross: true
             artifact_name: aegis-input
-            asset_name: aegis-input-aarch64-unknown-linux-musl.tar.gz
+            asset_name: aegis-input-aarch64-unknown-linux-gnu.tar.gz
 
           # macOS x86_64
           - target: x86_64-apple-darwin

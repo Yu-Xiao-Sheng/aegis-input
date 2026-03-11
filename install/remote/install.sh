@@ -138,13 +138,13 @@ detect_architecture() {
 
     case "$uname_machine" in
         x86_64|amd64)
-            arch="x86_64-unknown-linux-musl"
+            arch="x86_64-unknown-linux-gnu"
             ;;
         aarch64|arm64)
-            arch="aarch64-unknown-linux-musl"
+            arch="aarch64-unknown-linux-gnu"
             ;;
         armv7l|armhf)
-            arch="armv7-unknown-linux-musleabihf"
+            arch="armv7-unknown-linux-gnueabihf"
             ;;
         i386|i686)
             abort "不支持的 32 位 x86 架构: $uname_machine"
