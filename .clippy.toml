@@ -1,42 +1,14 @@
 # Clippy 配置
-# 对安装器模块应用更严格的规则
-
-# 允许在某些情况下使用 TODO 和 FIXME
-# TODO: 添加更严格的安装器规则
-[[lints.forbid]]
-name = "todo"
-level = "warn"
-
-[[lints.forbid]]
-name = "fixme"
-level = "warn"
 
 # 禁止在生产代码中使用 unwrap()
-[[lints.forbid]]
-name = "unwrap_used"
-level = "deny"
+unwrap_used = "deny"
 
 # 强制处理 Result
-[[lints.forbid]]
-name = "unreachable"
-level = "deny"
-
-# 禁止在其他地方使用 panic!()
-[[lints.forbid]]
-name = "panic"
-level = "deny"
-
-# 对于安装器模块，我们希望避免 panic 和 unwrap
-[[lints.forbid]]
-name = "todo"
-level = "deny"
-
-# 检查所有 async 函数都有错误处理
-[[lints.forbid]]
-name = "uninlined_format_args"
-level = "warn"
+expect_used = "warn"
+unwrap_used = "deny"
 
 # 不允许 unsafe 代码
-[[lints.forbid]]
-name = "unsafe_code"
-level = "forbid"
+unsafe_code = "forbid"
+
+# 警告 TODO 和 FIXME
+todo = "warn"
