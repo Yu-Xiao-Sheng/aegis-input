@@ -6,6 +6,14 @@
 mod tests {
     #[test]
     fn test_basic_detection_flow() {
-        // TODO: 实现基本检测流程测试
+        // 测试基本的检测流程
+        // TODO: 需要真实的输入设备或模拟环境
+        // 这需要在有输入设备的环境中运行
+    }
+
+    #[test]
+    fn test_device_scanning() {
+        // 测试设备扫描
+        // TODO: 验证扫描功能正确识别设备
     }
 }

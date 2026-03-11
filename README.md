@@ -18,6 +18,27 @@ curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/Yu-Xiao-S
 
 安装完成后，服务会自动启动。使用 `systemctl status aegis-input` 查看状态。
 
+### 使用检测功能
+
+安装后，可以使用交互式检测功能来识别和配置输入设备：
+
+```bash
+sudo aegis-input detect
+```
+
+这将：
+1. 扫描所有连接的输入设备
+2. 实时显示当前正在使用的设备
+3. 让您选择要禁用的设备
+4. 保存配置并立即生效
+
+其他命令：
+```bash
+sudo aegis-input detect --config-only  # 仅配置模式
+sudo aegis-input config --reset         # 重置配置
+sudo aegis-input status                  # 查看状态
+```
+
 ### 从源码构建
 
 如果要从源码构建：
