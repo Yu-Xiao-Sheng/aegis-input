@@ -1,50 +1,50 @@
 # [PROJECT_NAME] Constitution
-<!-- 示例: Spec Constitution, TaskFlow Constitution 等 -->
+<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
 
 ## Core Principles
 
 ### [PRINCIPLE_1_NAME]
-<!-- 示例: I. 库优先 -->
+<!-- Example: I. Library-First -->
 [PRINCIPLE_1_DESCRIPTION]
-<!-- 示例: 每个功能先抽象为独立库; 库必须可独立测试与文档化; 需要清晰目的 -->
+<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
 
 ### [PRINCIPLE_2_NAME]
-<!-- 示例: II. CLI 接口 -->
+<!-- Example: II. CLI Interface -->
 [PRINCIPLE_2_DESCRIPTION]
-<!-- 示例: 每个库提供 CLI; stdin/args 输入 -> stdout 输出, 错误 -> stderr; 支持 JSON 与人类可读 -->
+<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
 
 ### [PRINCIPLE_3_NAME]
-<!-- 示例: III. 测试优先（不可妥协） -->
+<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
 [PRINCIPLE_3_DESCRIPTION]
-<!-- 示例: TDD 强制: 先写测试 -> 用户确认 -> 测试失败 -> 再实现; 严格执行红绿重构 -->
+<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
 
 ### [PRINCIPLE_4_NAME]
-<!-- 示例: IV. 集成测试 -->
+<!-- Example: IV. Integration Testing -->
 [PRINCIPLE_4_DESCRIPTION]
-<!-- 示例: 需要集成测试的重点: 新库契约测试、契约变更、服务间通信、共享 schema -->
+<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
 
 ### [PRINCIPLE_5_NAME]
-<!-- 示例: V. 可观测性, VI. 版本策略与破坏性变更, VII. 简洁性 -->
+<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
 [PRINCIPLE_5_DESCRIPTION]
-<!-- 示例: 文本 I/O 便于调试; 结构化日志必需; 或 MAJOR.MINOR.BUILD; 或从简单开始 -->
+<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
 
 ## [SECTION_2_NAME]
-<!-- 示例: 额外约束, 安全要求, 性能标准等 -->
+<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
 
 [SECTION_2_CONTENT]
-<!-- 示例: 技术栈要求, 合规标准, 部署策略等 -->
+<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
 
 ## [SECTION_3_NAME]
-<!-- 示例: 开发流程, 评审流程, 质量门禁等 -->
+<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
 
 [SECTION_3_CONTENT]
-<!-- 示例: 代码评审要求, 测试门禁, 发布审批流程等 -->
+<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
 
 ## Governance
-<!-- 示例: 宪章高于其他实践; 修订需记录、审批与迁移计划 -->
+<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
 [GOVERNANCE_RULES]
-<!-- 示例: 所有 PR/评审必须验证合规; 复杂度必须说明理由; 使用 [GUIDANCE_FILE] 作为运行时指导 -->
+<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
 
 **Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- 示例: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->

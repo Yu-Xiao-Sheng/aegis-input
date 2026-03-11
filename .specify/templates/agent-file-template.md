@@ -1,28 +1,28 @@
-# [PROJECT NAME] 开发指南
+# [PROJECT NAME] Development Guidelines
 
-由所有功能计划自动生成。最近更新: [DATE]
+Auto-generated from all feature plans. Last updated: [DATE]
 
-## 当前技术栈
+## Active Technologies
 
-[从所有 plan.md 提取]
+[EXTRACTED FROM ALL PLAN.MD FILES]
 
-## 项目结构
+## Project Structure
 
 ```text
-[来自计划的实际结构]
+[ACTUAL STRUCTURE FROM PLANS]
 ```
 
-## 命令
+## Commands
 
-[仅列出当前技术栈需要的命令]
+[ONLY COMMANDS FOR ACTIVE TECHNOLOGIES]
 
-## 代码风格
+## Code Style
 
-[仅包含使用中的语言对应的风格]
+[LANGUAGE-SPECIFIC, ONLY FOR LANGUAGES IN USE]
 
-## 最近变更
+## Recent Changes
 
-[最近 3 个功能及其新增内容]
+[LAST 3 FEATURES AND WHAT THEY ADDED]
 
 <!-- MANUAL ADDITIONS START -->
 <!-- MANUAL ADDITIONS END -->
