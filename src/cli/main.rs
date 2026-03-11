@@ -19,6 +19,15 @@ pub fn run() -> anyhow::Result<i32> {
                 crate::cli::detect::run(args).await
             })
         }
+        "config" => {
+            let rt = tokio::runtime::Runtime::new()?;
+            rt.block_on(async {
+                // 简单参数解析
+                let reset = args.get(2).map(|s| s == "reset").unwrap_or(false);
+                let args = crate::cli::config::ConfigArgs { reset };
+                crate::cli::config::run(args).await
+            })
+        }
         "enable" => {
             let path = config_path();
             let mut config = Config::load_or_default(&path)?;
@@ -58,7 +67,7 @@ pub fn run() -> anyhow::Result<i32> {
 }
 
 fn print_usage() {
-    eprintln!("Usage: aegis-input <enable|disable|status|run|detect>");
+    eprintln!("Usage: aegis-input <enable|disable|status|run|detect|config>");
 }
 
 fn load_status_or_default() -> anyhow::Result<StatusSnapshot> {

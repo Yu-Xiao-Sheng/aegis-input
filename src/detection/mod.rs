@@ -7,12 +7,15 @@ use std::path::PathBuf;
 pub mod error;
 pub mod monitor;
 pub mod selector;
+pub mod selector_impl;
 pub mod session;
 pub mod session_impl;
 
 pub use error::DetectionError;
 pub use monitor::InputEvent;
 pub use monitor::InputEventType;
+pub use selector::DeviceSelector;
+pub use selector_impl::CliDeviceSelector;
 pub use session::{DetectionSession, SessionStartInfo, SessionResult, CompletionReason, SessionState};
 
 /// 输入设备
