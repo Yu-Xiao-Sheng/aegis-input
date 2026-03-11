@@ -53,7 +53,27 @@ pub async fn run(args: DetectArgs) -> Result<i32> {
     // 显示设备列表
     display_devices(&devices)?;
 
-    // TODO: 实现检测模式和设备选择
+    // 如果是仅配置模式，跳过检测
+    if args.config_only {
+        return run_config_mode(&devices).await;
+    }
+
+    // TODO: 实现完整的检测流程
+    // 当前只显示设备列表
+    println!("检测功能开发中...");
+    println!("当前版本仅支持设备扫描功能。");
+
+    Ok(0)
+}
+
+/// 配置模式
+async fn run_config_mode(devices: &[crate::detection::InputDevice]) -> Result<i32> {
+    println!("配置模式:");
+    println!("请选择要禁用的设备（输入编号，用逗号分隔）");
+    println!("输入 'none' 跳过\n");
+
+    // TODO: 实现设备选择逻辑
+    println!("配置模式开发中...");
 
     Ok(0)
 }

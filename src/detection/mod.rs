@@ -5,11 +5,15 @@
 use std::path::PathBuf;
 
 pub mod error;
-pub mod session;
 pub mod monitor;
 pub mod selector;
+pub mod session;
+pub mod session_impl;
 
 pub use error::DetectionError;
+pub use monitor::InputEvent;
+pub use monitor::InputEventType;
+pub use session::{DetectionSession, SessionStartInfo, SessionResult, CompletionReason, SessionState};
 
 /// 输入设备
 #[derive(Debug, Clone, PartialEq, Eq)]
