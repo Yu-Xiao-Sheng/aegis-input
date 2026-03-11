@@ -1,4 +1,4 @@
-use crate::config::config::{config_path, status_path, Config};
+use crate::config::{config_path, status_path, Config};
 use crate::service::status::StatusSnapshot;
 use std::env;
 

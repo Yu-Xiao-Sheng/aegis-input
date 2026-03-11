@@ -31,6 +31,8 @@
 - Rust（stable, 2021 edition） + udev, evdev, serde, toml, tracing, tracing-subscriber (001-linux-input-disable)
 - 本地配置文件（toml） (001-linux-input-disable)
 - Rust（stable, 2024 edition） + udev, evdev, serde, toml, tracing, tracing-subscriber (001-linux-input-disable)
+- Rust（stable, 2024 edition） + systemd, Shell install script (002-quick-install)
+- systemd unit + install metadata (002-quick-install)
 
 ## Recent Changes
 - 001-linux-input-disable: Added Rust（stable, 2021 edition） + udev, evdev, serde, toml, tracing, tracing-subscriber

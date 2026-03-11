@@ -19,19 +19,12 @@ impl Default for DeviceRules {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Default)]
 pub struct Config {
+    #[serde(default)]
     pub enabled: bool,
+    #[serde(default)]
     pub device_rules: DeviceRules,
-}
-
-impl Default for Config {
-    fn default() -> Self {
-        Self {
-            enabled: false,
-            device_rules: DeviceRules::default(),
-        }
-    }
 }
 
 impl Config {

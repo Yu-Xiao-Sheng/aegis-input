@@ -2,21 +2,36 @@
 
 Aegis Input 是一个低开销系统服务，当检测到外置键盘或鼠标时自动禁用笔记本内置键盘与触摸板。初始目标平台为 Linux（已在 Linux Mint 上验证），并保留清晰的抽象层以支持 Windows 和 macOS。
 
-**状态**
-已实现 Linux 版本的核心功能，支持启用/禁用与按类型独立的自动禁用逻辑。
+## 快速安装
 
-**关键目标**
-- 外置键盘或鼠标存在时自动禁用内置键盘与触摸板
-- 外置设备移除后恢复内置设备
-- 以系统服务形式运行并提供可靠日志
-- 采用 Linux 优先、可扩展的跨平台架构
+### 一键安装（推荐）
 
-**文档**
-- 实现方案与设计: `docs/implementation.md`
-
-**构建**
 ```bash
-cargo build
+curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/Yu-Xiao-Sheng/aegis-input/main/install/remote/install.sh | bash
+```
+
+**安装要求**：
+- Linux 系统（Debian/Ubuntu/Mint 系列）
+- systemd（用于服务管理）
+- sudo 权限（系统级安装）
+- 互联网连接
+
+安装完成后，服务会自动启动。使用 `systemctl status aegis-input` 查看状态。
+
+### 从源码构建
+
+如果要从源码构建：
+
+```bash
+# 克隆仓库
+git clone https://github.com/Yu-Xiao-Sheng/aegis-input.git
+cd aegis-input
+
+# 构建
+cargo build --release
+
+# 安装
+sudo cp target/release/aegis-input /usr/local/bin/
 ```
 
 **运行（本地验证）**

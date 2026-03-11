@@ -1,4 +1,4 @@
-use crate::config::config::{config_path, status_path, Config};
+use crate::config::{config_path, status_path, Config};
 use crate::platform::linux::udev::LinuxBackend;
 use crate::service::logging::init_logging;
 use crate::service::runner::Runner;

@@ -11,6 +11,12 @@ pub struct EvdevDisabler {
     pointing_handles: HashMap<PathBuf, evdev::Device>,
 }
 
+impl Default for EvdevDisabler {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl EvdevDisabler {
     pub fn new() -> Self {
         Self {

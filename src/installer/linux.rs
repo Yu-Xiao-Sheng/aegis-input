@@ -208,13 +208,12 @@ impl LinuxInstaller {
         }
 
         // 如果目录为空，删除它
-        if metadata_dir.exists() {
-            if let Ok(entries) = fs::read_dir(&metadata_dir) {
-                if entries.count() == 0 {
-                    fs::remove_dir(&metadata_dir)
-                        .map_err(|e| InstallError::UninstallationFailed(format!("Failed to remove metadata dir: {}", e)))?;
-                }
-            }
+        if metadata_dir.exists()
+            && let Ok(entries) = fs::read_dir(&metadata_dir)
+            && entries.count() == 0
+        {
+            fs::remove_dir(&metadata_dir)
+                .map_err(|e| InstallError::UninstallationFailed(format!("Failed to remove metadata dir: {}", e)))?;
         }
 
         Ok(())
@@ -271,11 +270,11 @@ impl Installer for LinuxInstaller {
         self.disable_service()?;
 
         // 2. 删除 systemd unit 文件
-        if let Some(unit_path) = &self.metadata.unit_path {
-            if unit_path.exists() {
-                fs::remove_file(unit_path)
-                    .map_err(|e| InstallError::UninstallationFailed(format!("Failed to remove unit file: {}", e)))?;
-            }
+        if let Some(unit_path) = &self.metadata.unit_path
+            && unit_path.exists()
+        {
+            fs::remove_file(unit_path)
+                .map_err(|e| InstallError::UninstallationFailed(format!("Failed to remove unit file: {}", e)))?;
         }
 
         // 3. 删除安装元数据
