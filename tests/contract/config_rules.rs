@@ -1,4 +1,4 @@
-use aegis_input::config::config::{Config, DeviceRules};
+use aegis_input::config::{Config, DeviceRules};
 use tempfile::tempdir;
 
 #[test]
