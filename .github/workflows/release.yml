@@ -29,20 +29,6 @@ jobs:
             artifact_name: aegis-input
             asset_name: aegis-input-aarch64-unknown-linux-gnu.tar.gz
 
-          # macOS x86_64
-          - target: x86_64-apple-darwin
-            os: macos-latest
-            use_cross: false
-            artifact_name: aegis-input
-            asset_name: aegis-input-x86_64-apple-darwin.tar.gz
-
-          # macOS aarch64 (Apple Silicon)
-          - target: aarch64-apple-darwin
-            os: macos-latest
-            use_cross: false
-            artifact_name: aegis-input
-            asset_name: aegis-input-aarch64-apple-darwin.tar.gz
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
