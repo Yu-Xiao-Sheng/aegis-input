@@ -1,4 +1,4 @@
-use crate::config::config::DeviceRules;
+use crate::config::DeviceRules;
 use crate::core::policy::PolicyAction;
 use crate::core::state::{DeviceEvent, DeviceOrigin, DeviceState, DeviceType};
 use crate::platform::PlatformBackend;

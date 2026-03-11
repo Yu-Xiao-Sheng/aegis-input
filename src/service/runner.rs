@@ -1,4 +1,4 @@
-use crate::config::config::Config;
+use crate::config::Config;
 use crate::core::policy::PolicyAction;
 use crate::core::state::SystemState;
 use crate::platform::PlatformBackend;
