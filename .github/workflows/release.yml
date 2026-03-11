@@ -16,18 +16,13 @@ jobs:
       matrix:
         include:
           # Linux x86_64 (gnu for dynamic linking)
+          # Note: aarch64 disabled due to libudev cross-compilation issues
+          # TODO: Enable aarch64 once we can configure cross with libudev
           - target: x86_64-unknown-linux-gnu
             os: ubuntu-latest
             use_cross: false
             artifact_name: aegis-input
             asset_name: aegis-input-x86_64-unknown-linux-gnu.tar.gz
-
-          # Linux aarch64 (gnu for dynamic linking)
-          - target: aarch64-unknown-linux-gnu
-            os: ubuntu-latest
-            use_cross: true
-            artifact_name: aegis-input
-            asset_name: aegis-input-aarch64-unknown-linux-gnu.tar.gz
 
     steps:
       - name: Checkout code
@@ -43,20 +38,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libudev-dev
 
-      - name: Install cross
-        if: matrix.use_cross
-        uses: taiki-e/install-action@cross
-        with:
-          tool: cross
-
       - name: Build binary
         shell: bash
         run: |
-          if [ "${{ matrix.use_cross }}" = "true" ]; then
-            cross build --release --target ${{ matrix.target }}
-          else
-            cargo build --release --target ${{ matrix.target }}
-          fi
+          cargo build --release --target ${{ matrix.target }}
 
       - name: Create tarball
         shell: bash
