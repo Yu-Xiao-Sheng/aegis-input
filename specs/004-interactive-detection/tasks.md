@@ -21,29 +21,31 @@
 
 ---
 
-## Phase 1: Setup
+## Phase 1: Setup ✅ COMPLETED
 
 **目标**: 初始化项目结构，添加新依赖
 
 ### 依赖配置
 
-- [ ] T001 添加 evdev 依赖到 Cargo.toml
-- [ ] T002 添加 crossterm 依赖到 Cargo.toml
-- [ ] T003 [P] 添加 chrono 依赖到 Cargo.toml（用于时间戳）
-- [ ] T004 [P] 添加 thiserror 依赖到 Cargo.toml（用于错误类型）
+- [X] T001 添加 evdev 依赖到 Cargo.toml
+- [X] T002 添加 crossterm 依赖到 Cargo.toml
+- [X] T003 [P] 添加 chrono 依赖到 Cargo.toml（用于时间戳）
+- [X] T004 [P] 添加 thiserror 依赖到 Cargo.toml（用于错误类型）
 
 ### 目录结构创建
 
-- [ ] T005 创建 src/detection/ 目录及 mod.rs
-- [ ] T006 [P] 创建 src/detection/session.rs
-- [ ] T007 [P] 创建 src/detection/monitor.rs
-- [ ] T008 [P] 创建 src/detection/selector.rs
-- [ ] T009 创建 tests/integration/detection_test.rs
-- [ ] T010 [P] 创建 tests/integration/config_test.rs
-- [ ] T011 [P] 创建 tests/unit/session_test.rs
-- [ ] T012 [P] 创建 tests/unit/selector_test.rs
+- [X] T005 创建 src/detection/ 目录及 mod.rs
+- [X] T006 [P] 创建 src/detection/session.rs
+- [X] T007 [P] 创建 src/detection/monitor.rs
+- [X] T008 [P] 创建 src/detection/selector.rs
+- [X] T009 创建 tests/integration/detection_test.rs
+- [X] T010 [P] 创建 tests/integration/config_test.rs
+- [X] T011 [P] 创建 tests/unit/session_test.rs
+- [X] T012 [P] 创建 tests/unit/selector_test.rs
 
-**完成标准**: 所有目录创建完成，依赖添加到 Cargo.toml
+**完成标准**: 所有目录创建完成，依赖添加到 Cargo.toml ✅
+
+**提交**: `86144aa` - feat: 完成 Phase 1 - 项目初始化
 
 ---
 

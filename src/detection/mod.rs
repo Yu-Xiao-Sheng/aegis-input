@@ -4,9 +4,12 @@
 
 use std::path::PathBuf;
 
+pub mod error;
 pub mod session;
 pub mod monitor;
 pub mod selector;
+
+pub use error::DetectionError;
 
 /// 输入设备
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -29,6 +32,42 @@ pub struct InputDevice {
     pub enabled: bool,
     /// 是否支持禁用
     pub supports_disable: bool,
+}
+
+impl InputDevice {
+    /// 验证设备信息
+    pub fn validate(&self) -> Result<(), DetectionError> {
+        // 检查名称非空
+        if self.name.is_empty() {
+            return Err(DetectionError::ConfigValidationError(
+                "设备名称不能为空".into(),
+            ));
+        }
+
+        // 检查路径是绝对路径
+        if !self.path.is_absolute() {
+            return Err(DetectionError::ConfigValidationError(
+                format!("设备路径必须是绝对路径: {:?}", self.path),
+            ));
+        }
+
+        // 检查路径存在
+        if !self.path.exists() {
+            return Err(DetectionError::DeviceAccessFailed(format!(
+                "设备文件不存在: {:?}",
+                self.path
+            )));
+        }
+
+        // 检查设备类型不是 Unknown
+        if matches!(self.device_type, DeviceType::Unknown) {
+            return Err(DetectionError::ConfigValidationError(
+                "设备类型未知".into(),
+            ));
+        }
+
+        Ok(())
+    }
 }
 
 /// 设备类型

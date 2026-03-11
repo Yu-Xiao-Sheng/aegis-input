@@ -3,6 +3,8 @@
 //! 定义检测会话的核心接口和实现
 
 use anyhow::Result;
+use std::collections::HashSet;
+use std::path::PathBuf;
 
 /// 检测会话管理接口
 #[async_trait::async_trait]
@@ -14,13 +16,13 @@ pub trait DetectionSession: Send + Sync {
     async fn wait(&mut self) -> Result<SessionResult>;
 
     /// 获取当前活跃的设备列表
-    fn active_devices(&self) -> std::collections::HashSet<std::path::PathBuf>;
+    fn active_devices(&self) -> HashSet<PathBuf>;
 
     /// 取消会话
     async fn cancel(&mut self) -> Result<()>;
 
     /// 完成会话并生成配置
-    async fn complete(&mut self, selection: std::collections::HashSet<std::path::PathBuf>) -> Result<crate::config::DeviceConfiguration>;
+    async fn complete(&mut self, selection: HashSet<PathBuf>) -> Result<crate::config::DeviceConfiguration>;
 }
 
 /// 会话启动信息
@@ -36,7 +38,7 @@ pub struct SessionStartInfo {
 pub struct SessionResult {
     pub session_id: String,
     pub end_time: chrono::DateTime<chrono::Utc>,
-    pub active_devices: std::collections::HashSet<std::path::PathBuf>,
+    pub active_devices: HashSet<PathBuf>,
     pub duration: std::time::Duration,
     pub completion_reason: CompletionReason,
 }
@@ -50,4 +52,19 @@ pub enum CompletionReason {
     Timeout,
     /// 错误
     Error,
+}
+
+/// 会话状态
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum SessionState {
+    /// 初始化中
+    Initializing,
+    /// 运行中
+    Running,
+    /// 用户选择中
+    UserSelection,
+    /// 已完成
+    Completed,
+    /// 失败
+    Failed,
 }
