@@ -86,3 +86,32 @@ fn is_not_found(err: &anyhow::Error) -> bool {
         .map(|e| e.kind() == io::ErrorKind::NotFound)
         .unwrap_or(false)
 }
+
+/// 设备配置
+///
+/// 表示用户选择要禁用的设备配置
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DeviceConfiguration {
+    /// 配置版本
+    pub version: String,
+    /// 要禁用的设备引用列表
+    pub disabled_devices: Vec<DeviceRef>,
+    /// 配置创建时间
+    pub created_at: chrono::DateTime<chrono::Utc>,
+    /// 配置更新时间
+    pub updated_at: chrono::DateTime<chrono::Utc>,
+}
+
+/// 设备引用
+///
+/// 用于配置文件中引用特定设备
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DeviceRef {
+    /// 设备路径（优先匹配）
+    pub path: Option<PathBuf>,
+    /// 设备名称（后备匹配）
+    pub name: Option<String>,
+    /// 验证时间（用于警告）
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub verified_at: Option<chrono::DateTime<chrono::Utc>>,
+}
