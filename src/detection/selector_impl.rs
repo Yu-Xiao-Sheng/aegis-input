@@ -2,8 +2,8 @@
 //!
 //! 实现交互式设备选择
 
-use anyhow::Result;
 use crate::detection::{DeviceSelector, InputDevice};
+use anyhow::Result;
 use std::collections::HashSet;
 use std::io::{self, Write};
 
@@ -39,7 +39,10 @@ impl DeviceSelector for CliDeviceSelector {
         if !inactive_devices.is_empty() {
             println!("未活跃的设备:\n");
             for device in inactive_devices {
-                let idx = all_devices.iter().position(|d| d.path == device.path).unwrap();
+                let idx = all_devices
+                    .iter()
+                    .position(|d| d.path == device.path)
+                    .unwrap();
                 println!("    [{}] {}", idx + 1, device.name);
             }
             println!();

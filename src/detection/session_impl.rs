@@ -2,11 +2,10 @@
 //!
 //! 实现交互式设备检测会话
 
-use anyhow::Result;
 use crate::detection::{
-    DetectionSession, SessionStartInfo, SessionResult, CompletionReason,
-    SessionState, InputDevice,
+    CompletionReason, DetectionSession, InputDevice, SessionResult, SessionStartInfo, SessionState,
 };
+use anyhow::Result;
 use std::collections::HashSet;
 use std::path::PathBuf;
 use std::time::Duration;
@@ -96,7 +95,10 @@ impl DetectionSession for LinuxDetectionSession {
         Ok(())
     }
 
-    async fn complete(&mut self, selection: HashSet<PathBuf>) -> Result<crate::config::DeviceConfiguration> {
+    async fn complete(
+        &mut self,
+        selection: HashSet<PathBuf>,
+    ) -> Result<crate::config::DeviceConfiguration> {
         // 创建配置
         let disabled_devices = selection
             .into_iter()

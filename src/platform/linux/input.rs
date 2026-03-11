@@ -2,9 +2,9 @@
 //!
 //! 使用 evdev 扫描和识别输入设备
 
+use crate::detection::{BusType, DeviceType, InputDevice};
 use anyhow::Result;
 use std::path::PathBuf;
-use crate::detection::{InputDevice, DeviceType, BusType};
 
 /// 扫描所有输入设备
 pub fn scan_input_devices() -> Result<Vec<InputDevice>> {
@@ -53,10 +53,7 @@ fn parse_evdev_device(device: &evdev::Device) -> Option<InputDevice> {
     let bus_type = get_bus_type(device);
 
     // 检查是否支持禁用（外置设备可以禁用）
-    let supports_disable = matches!(
-        bus_type,
-        BusType::Usb | BusType::Bluetooth
-    );
+    let supports_disable = matches!(bus_type, BusType::Usb | BusType::Bluetooth);
 
     Some(InputDevice {
         name,
@@ -82,8 +79,6 @@ fn extract_device_path(name: &str) -> PathBuf {
     }
     PathBuf::from("/dev/input/event0")
 }
-
-
 
 /// 获取设备类型
 fn get_device_type(device: &evdev::Device) -> DeviceType {

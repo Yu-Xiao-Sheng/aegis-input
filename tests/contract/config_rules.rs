@@ -8,9 +8,24 @@ fn default_rules_when_config_missing() {
 
     let config = Config::load_or_default(&path).expect("load default");
     assert!(!config.enabled);
-    assert!(config.device_rules.external_buses.contains(&"usb".to_string()));
-    assert!(config.device_rules.external_buses.contains(&"bluetooth".to_string()));
-    assert!(config.device_rules.internal_buses.contains(&"i8042".to_string()));
+    assert!(
+        config
+            .device_rules
+            .external_buses
+            .contains(&"usb".to_string())
+    );
+    assert!(
+        config
+            .device_rules
+            .external_buses
+            .contains(&"bluetooth".to_string())
+    );
+    assert!(
+        config
+            .device_rules
+            .internal_buses
+            .contains(&"i8042".to_string())
+    );
 }
 
 #[test]

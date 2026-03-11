@@ -2,12 +2,12 @@
 //!
 //! 使用 evdev 实现异步设备事件监听
 
-use anyhow::Result;
 use crate::detection::InputDevice;
 use crate::detection::{InputEvent, InputEventType};
+use anyhow::Result;
 use std::path::PathBuf;
-use tokio::sync::mpsc;
 use std::time::Duration;
+use tokio::sync::mpsc;
 
 /// Linux 设备监听器
 pub struct LinuxDetectionDeviceMonitor {

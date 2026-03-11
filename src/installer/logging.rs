@@ -2,7 +2,7 @@
 //!
 //! 提供统一的日志记录功能
 
-use tracing::{error, info, warn, debug};
+use tracing::{debug, error, info, warn};
 
 /// 安装器日志配置
 pub struct InstallLogger;

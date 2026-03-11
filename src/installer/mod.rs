@@ -3,8 +3,8 @@
 //! 本模块定义了平台无关的安装接口，支持 Linux、Windows 和 macOS 的安装方式。
 
 pub mod error;
-pub mod logging;
 pub mod linux;
+pub mod logging;
 
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
@@ -116,9 +116,10 @@ impl InstallerFactory {
 
         match platform.as_str() {
             "linux" => Ok(Box::new(linux::LinuxInstaller::new()?)),
-            _ => Err(InstallError::InstallationFailed(
-                format!("不支持的平台: {}", platform)
-            )),
+            _ => Err(InstallError::InstallationFailed(format!(
+                "不支持的平台: {}",
+                platform
+            ))),
         }
     }
 }
@@ -130,9 +131,10 @@ fn detect_platform() -> Result<String, InstallError> {
         "linux" => Ok("linux".to_string()),
         "windows" => Ok("windows".to_string()),
         "macos" => Ok("macos".to_string()),
-        _ => Err(InstallError::InstallationFailed(
-            format!("不支持的操作系统: {}", os)
-        )),
+        _ => Err(InstallError::InstallationFailed(format!(
+            "不支持的操作系统: {}",
+            os
+        ))),
     }
 }
 
@@ -165,7 +167,10 @@ mod tests {
     fn test_default_metadata() {
         let metadata = default_metadata();
         assert_eq!(metadata.platform, "linux");
-        assert_eq!(metadata.install_path, PathBuf::from("/usr/local/bin/aegis-input"));
+        assert_eq!(
+            metadata.install_path,
+            PathBuf::from("/usr/local/bin/aegis-input")
+        );
     }
 
     #[test]

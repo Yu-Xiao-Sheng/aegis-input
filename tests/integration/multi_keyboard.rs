@@ -56,14 +56,18 @@ fn multiple_external_keyboards_require_all_removed() {
     assert_eq!(runner.backend().actions.len(), actions_len_before);
 
     runner.process_next_event().expect("kb1 disconnect");
-    assert!(!runner
-        .backend()
-        .actions
-        .contains(&PolicyAction::Enable(DeviceType::Keyboard)));
+    assert!(
+        !runner
+            .backend()
+            .actions
+            .contains(&PolicyAction::Enable(DeviceType::Keyboard))
+    );
 
     runner.process_next_event().expect("kb2 disconnect");
-    assert!(runner
-        .backend()
-        .actions
-        .contains(&PolicyAction::Enable(DeviceType::Keyboard)));
+    assert!(
+        runner
+            .backend()
+            .actions
+            .contains(&PolicyAction::Enable(DeviceType::Keyboard))
+    );
 }

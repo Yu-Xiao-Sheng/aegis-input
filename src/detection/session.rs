@@ -22,7 +22,10 @@ pub trait DetectionSession: Send + Sync {
     async fn cancel(&mut self) -> Result<()>;
 
     /// 完成会话并生成配置
-    async fn complete(&mut self, selection: HashSet<PathBuf>) -> Result<crate::config::DeviceConfiguration>;
+    async fn complete(
+        &mut self,
+        selection: HashSet<PathBuf>,
+    ) -> Result<crate::config::DeviceConfiguration>;
 }
 
 /// 会话启动信息

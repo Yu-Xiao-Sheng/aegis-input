@@ -16,7 +16,9 @@ pub use monitor::InputEvent;
 pub use monitor::InputEventType;
 pub use selector::DeviceSelector;
 pub use selector_impl::CliDeviceSelector;
-pub use session::{DetectionSession, SessionStartInfo, SessionResult, CompletionReason, SessionState};
+pub use session::{
+    CompletionReason, DetectionSession, SessionResult, SessionStartInfo, SessionState,
+};
 
 /// 输入设备
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -53,9 +55,10 @@ impl InputDevice {
 
         // 检查路径是绝对路径
         if !self.path.is_absolute() {
-            return Err(DetectionError::ConfigValidationError(
-                format!("设备路径必须是绝对路径: {:?}", self.path),
-            ));
+            return Err(DetectionError::ConfigValidationError(format!(
+                "设备路径必须是绝对路径: {:?}",
+                self.path
+            )));
         }
 
         // 检查路径存在
@@ -68,9 +71,7 @@ impl InputDevice {
 
         // 检查设备类型不是 Unknown
         if matches!(self.device_type, DeviceType::Unknown) {
-            return Err(DetectionError::ConfigValidationError(
-                "设备类型未知".into(),
-            ));
+            return Err(DetectionError::ConfigValidationError("设备类型未知".into()));
         }
 
         Ok(())

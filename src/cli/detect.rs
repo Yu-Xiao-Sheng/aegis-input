@@ -85,7 +85,8 @@ fn display_devices(devices: &[crate::detection::InputDevice]) -> Result<()> {
     for (i, device) in devices.iter().enumerate() {
         println!("  [{}] {}", i + 1, device.name);
         println!("      路径: {:?}", device.path.display());
-        println!("      类型: {} | 总线: {}",
+        println!(
+            "      类型: {} | 总线: {}",
             format_device_type(device.device_type),
             format_bus_type(device.bus_type)
         );

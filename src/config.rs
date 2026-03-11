@@ -14,7 +14,12 @@ impl Default for DeviceRules {
     fn default() -> Self {
         Self {
             external_buses: vec!["usb".into(), "bluetooth".into()],
-            internal_buses: vec!["i8042".into(), "serio".into(), "platform".into(), "i2c".into()],
+            internal_buses: vec![
+                "i8042".into(),
+                "serio".into(),
+                "platform".into(),
+                "i2c".into(),
+            ],
         }
     }
 }
@@ -217,9 +222,7 @@ impl ConfigValidator {
         for device_ref in &config.disabled_devices {
             // 至少有路径或名称之一
             if device_ref.path.is_none() && device_ref.name.is_none() {
-                return Err(anyhow::anyhow!(
-                    "设备引用无效：必须提供 path 或 name"
-                ));
+                return Err(anyhow::anyhow!("设备引用无效：必须提供 path 或 name"));
             }
         }
 

@@ -26,14 +26,18 @@ fn external_mouse_disables_and_restores_internal_pointing() {
     let mut runner = Runner::new(backend, true).expect("runner init");
 
     runner.process_next_event().expect("process connect");
-    assert!(runner
-        .backend()
-        .actions
-        .contains(&PolicyAction::Disable(DeviceType::Pointing)));
+    assert!(
+        runner
+            .backend()
+            .actions
+            .contains(&PolicyAction::Disable(DeviceType::Pointing))
+    );
 
     runner.process_next_event().expect("process disconnect");
-    assert!(runner
-        .backend()
-        .actions
-        .contains(&PolicyAction::Enable(DeviceType::Pointing)));
+    assert!(
+        runner
+            .backend()
+            .actions
+            .contains(&PolicyAction::Enable(DeviceType::Pointing))
+    );
 }
